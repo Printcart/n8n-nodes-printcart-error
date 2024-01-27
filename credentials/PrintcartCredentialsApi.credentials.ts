@@ -5,22 +5,22 @@ import {
 	INodeProperties,
 } from 'n8n-workflow';
 
-export class ExampleCredentialsApi implements ICredentialType {
-	name = 'exampleCredentialsApi';
-	displayName = 'Example Credentials API';
+export class PrintcartCredentialsApi implements ICredentialType {
+	name = 'printcartCredentialsApi';
+	displayName = 'Printcart Credentials API';
 	properties: INodeProperties[] = [
 		// The credentials to get from user and save encrypted.
 		// Properties can be defined exactly in the same way
 		// as node properties.
 		{
-			displayName: 'User Name',
-			name: 'username',
+			displayName: 'Sid',
+			name: 'sid',
 			type: 'string',
 			default: '',
 		},
 		{
-			displayName: 'Password',
-			name: 'password',
+			displayName: 'Secert',
+			name: 'secert',
 			type: 'string',
 			typeOptions: {
 				password: true,
@@ -35,22 +35,18 @@ export class ExampleCredentialsApi implements ICredentialType {
 	authenticate: IAuthenticateGeneric = {
 		type: 'generic',
 		properties: {
-			auth: {
-				username: '={{ $credentials.username }}',
-				password: '={{ $credentials.password }}',
-			},
-			qs: {
-				// Send this as part of the query string
-				n8n: 'rocks',
+			headers: {
+				auth: {
+					url: 'https://{{ $credentials.sid }}:{{ $credentials.secert }}@api.printcart.com/v1/account'
+				}
 			},
 		},
 	};
-
-	// The block below tells how this credential can be tested
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: 'https://example.com/',
-			url: '',
+			baseURL: 'https://{{ $credentials.sid }}:{{ $credentials.secert }}@api.printcart.com',
+			url: '/v1/account',
+			method: "GET"
 		},
 	};
 }
