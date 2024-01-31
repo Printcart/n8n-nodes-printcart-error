@@ -26,8 +26,8 @@ export class PrintcartApi implements ICredentialType {
 			default: '',
 		},
 		{
-			displayName: 'Secert',
-			name: 'secert',
+			displayName: 'Secret',
+			name: 'secret',
 			type: 'string',
 			typeOptions: {
 				password: true,
@@ -40,15 +40,20 @@ export class PrintcartApi implements ICredentialType {
 		properties: {
 			headers: {
 				auth: {
-					url: '=https://{{$credentials.sid}}:{{$credentials.secert}}@api.printcart.com/v1/account'
-				}
+					sid: '={{ $credentials.sid }}',
+				  secret: '={{ $credentials.secret }}',
+				},
+				qs: {
+					// Send this as part of the query string
+					n8n: 'rocks',
+				},
 			},
 		},
 	};
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: '=https://{{$credentials.sid }}:{{$credentials.secert}}@api.printcart.com',
-			url: '/v1/account',
+			 baseURL: '=https://{{$credentials.sid}}:{{$credentials.secret}}@api.printcart.com',
+			 url: '/v1/account',
 		},
 	};
 }
