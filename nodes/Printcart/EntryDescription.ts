@@ -171,8 +171,109 @@ export const storesOperations: INodeProperties[] = [
 		default: 'getStore',
 	},
 ];
-// entry
+
 export const storeFields: INodeProperties[] = [
+	/* -------------------------------------------------------------------------- */
+	/*                         entry:Get list of store                            */
+	/* -------------------------------------------------------------------------- */
+	{
+		displayName: 'Limit',
+		name: 'limitProduct',
+		type: 'number',
+		description: 'Max number of results to return',
+		default: 10,
+		typeOptions: {
+			numberPrecision: 0,
+			minValue: 10,
+			numberStepSize: 1,
+		},
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['store'],
+				operation: ['getStore'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'collection',
+		placeholder: 'Add the way you want to sort',
+		options: [
+			{
+				displayName: 'Type',
+				name: 'type',
+				type: 'options',
+				options: [
+					{
+						name: 'Desc',
+						value: 'desc',
+					},
+					{
+						name: 'Asc',
+						value: 'asc',
+					},
+				],
+				default: 'desc',
+			},
+		],
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['store'],
+				operation: ['getStore'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort By',
+		name: 'sortBy',
+		type: 'string',
+		default: 'id',
+		displayOptions: {
+			show: {
+				resource: ['store'],
+				operation: ['getStore'],
+			},
+		},
+		description: 'Sort by a element of product',
+	},
+	{
+		displayName: 'Get By Status',
+		name: 'getByStatus',
+		type: 'collection',
+		placeholder: 'Choose Status',
+		options: [
+			{
+				displayName: 'Type',
+				name: 'type',
+				type: 'options',
+				options: [
+					{
+						name: 'Publish',
+						value: 'publish',
+					},
+					{
+						name: 'Draft',
+						value: 'darft',
+					},
+					{
+						name: 'Trashed',
+						value: 'trashed',
+					},
+				],
+				default: 'publish',
+			},
+		],
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['store'],
+				operation: ['getStore'],
+			},
+		},
+	},
 	/* -------------------------------------------------------------------------- */
 	/*                                entry:create                                */
 	/* -------------------------------------------------------------------------- */
@@ -313,17 +414,6 @@ export const storeFields: INodeProperties[] = [
 		},
 		description: 'Pexels that you want to update',
 	},
-	/* -------------------------------------------------------------------------- */
-	/*                                entry:delete                               */
-	/* -------------------------------------------------------------------------- */
-
-	/* -------------------------------------------------------------------------- */
-	/*                                entry:get store details                     */
-	/* -------------------------------------------------------------------------- */
-
-	/* -------------------------------------------------------------------------- */
-	/*                                entry:Renew AuthToken                   */
-	/* -------------------------------------------------------------------------- */
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -1106,6 +1196,107 @@ export const sideFields: INodeProperties[] = [
 		},
 		description: 'Status of side',
 	},
+	/* -------------------------------------------------------------------------- */
+	/*                         entry:Get list of sides                            */
+	/* -------------------------------------------------------------------------- */
+	{
+		displayName: 'Limit',
+		name: 'limitProduct',
+		type: 'number',
+		description: 'Max number of results to return',
+		default: 10,
+		typeOptions: {
+			numberPrecision: 0,
+			minValue: 10,
+			numberStepSize: 1,
+		},
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['side'],
+				operation: ['getListSide'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'collection',
+		placeholder: 'Add the way you want to sort',
+		options: [
+			{
+				displayName: 'Type',
+				name: 'type',
+				type: 'options',
+				options: [
+					{
+						name: 'Desc',
+						value: 'desc',
+					},
+					{
+						name: 'Asc',
+						value: 'asc',
+					},
+				],
+				default: 'desc',
+			},
+		],
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['side'],
+				operation: ['getListSide'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort By',
+		name: 'sortBy',
+		type: 'string',
+		default: 'id',
+		displayOptions: {
+			show: {
+				resource: ['side'],
+				operation: ['getListSide'],
+			},
+		},
+		description: 'Sort by a element of product',
+	},
+	{
+		displayName: 'Get By Status',
+		name: 'getByStatus',
+		type: 'collection',
+		placeholder: 'Choose Status',
+		options: [
+			{
+				displayName: 'Type',
+				name: 'type',
+				type: 'options',
+				options: [
+					{
+						name: 'Publish',
+						value: 'publish',
+					},
+					{
+						name: 'Draft',
+						value: 'darft',
+					},
+					{
+						name: 'Trashed',
+						value: 'trashed',
+					},
+				],
+				default: 'publish',
+			},
+		],
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['side'],
+				operation: ['getListSide'],
+			},
+		},
+	},
 ];
 /* -------------------------------------------------------------------------- */
 /*                                Image                                       */
@@ -1123,16 +1314,22 @@ export const imageOperations: INodeProperties[] = [
 		},
 		options: [
 			{
+				name: 'Add New Image',
+				value: 'addImage',
+				description: 'Add images',
+				action: 'Add image',
+			},
+			{
+				name: 'Count Image',
+				value: 'countImage',
+				description: 'Count images',
+				action: 'Count number of image',
+			},
+			{
 				name: 'Delete Image',
 				value: 'deleteImage',
 				description: 'Delete a image',
 				action: 'Delete a image',
-			},
-			{
-				name: 'Get List of Image',
-				value: 'getListImage',
-				description: 'Get a list of image',
-				action: 'Get a list of image',
 			},
 			{
 				name: 'Get Image Detail',
@@ -1141,10 +1338,10 @@ export const imageOperations: INodeProperties[] = [
 				action: 'Get a image detail',
 			},
 			{
-				name: 'Count Image',
-				value: 'countImage',
-				description: 'Count images',
-				action: 'Count number of image',
+				name: 'Get List of Image',
+				value: 'getListImage',
+				description: 'Get a list of image',
+				action: 'Get a list of image',
 			},
 		],
 		default: 'getListImage',
@@ -1152,6 +1349,72 @@ export const imageOperations: INodeProperties[] = [
 ];
 
 export const imageFields: INodeProperties[] = [
+	/* -------------------------------------------------------------------------- */
+	/*                         entry:Get list of image                            */
+	/* -------------------------------------------------------------------------- */
+	{
+		displayName: 'Limit',
+		name: 'limitProduct',
+		type: 'number',
+		description: 'Max number of results to return',
+		default: 10,
+		typeOptions: {
+			numberPrecision: 0,
+			minValue: 10,
+			numberStepSize: 1,
+		},
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['image'],
+				operation: ['getListImage'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'collection',
+		placeholder: 'Add the way you want to sort',
+		options: [
+			{
+				displayName: 'Type',
+				name: 'type',
+				type: 'options',
+				options: [
+					{
+						name: 'Desc',
+						value: 'desc',
+					},
+					{
+						name: 'Asc',
+						value: 'asc',
+					},
+				],
+				default: 'desc',
+			},
+		],
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['image'],
+				operation: ['getListImage'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort By',
+		name: 'sortBy',
+		type: 'string',
+		default: 'id',
+		displayOptions: {
+			show: {
+				resource: ['image'],
+				operation: ['getListImage'],
+			},
+		},
+		description: 'Sort by a element of product',
+	},
 	/* -------------------------------------------------------------------------- */
 	/*            entry: Get,Delete image detail                                  */
 	/* -------------------------------------------------------------------------- */
@@ -1221,6 +1484,72 @@ export const clipartOperations: INodeProperties[] = [
 ];
 
 export const clipartFields: INodeProperties[] = [
+	/* -------------------------------------------------------------------------- */
+	/*                         entry:Get list of clipart                          */
+	/* -------------------------------------------------------------------------- */
+	{
+		displayName: 'Limit',
+		name: 'limitProduct',
+		type: 'number',
+		description: 'Max number of results to return',
+		default: 10,
+		typeOptions: {
+			numberPrecision: 0,
+			minValue: 10,
+			numberStepSize: 1,
+		},
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['clipart'],
+				operation: ['getClipartList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'collection',
+		placeholder: 'Add the way you want to sort',
+		options: [
+			{
+				displayName: 'Type',
+				name: 'type',
+				type: 'options',
+				options: [
+					{
+						name: 'Desc',
+						value: 'desc',
+					},
+					{
+						name: 'Asc',
+						value: 'asc',
+					},
+				],
+				default: 'desc',
+			},
+		],
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['clipart'],
+				operation: ['getClipartList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort By',
+		name: 'sortBy',
+		type: 'string',
+		default: 'id',
+		displayOptions: {
+			show: {
+				resource: ['clipart'],
+				operation: ['getClipartList'],
+			},
+		},
+		description: 'Sort by a element',
+	},
 	/* -------------------------------------------------------------------------- */
 	/*            entry: Get,Delete clipart detail                                  */
 	/* -------------------------------------------------------------------------- */
@@ -1307,6 +1636,72 @@ export const designsOperations: INodeProperties[] = [
 	},
 ];
 export const designFields: INodeProperties[] = [
+	/* -------------------------------------------------------------------------- */
+	/*                         entry:Get list of design                           */
+	/* -------------------------------------------------------------------------- */
+	{
+		displayName: 'Limit',
+		name: 'limitProduct',
+		type: 'number',
+		description: 'Max number of results to return',
+		default: 10,
+		typeOptions: {
+			numberPrecision: 0,
+			minValue: 10,
+			numberStepSize: 1,
+		},
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['design'],
+				operation: ['getDesignList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'collection',
+		placeholder: 'Add the way you want to sort',
+		options: [
+			{
+				displayName: 'Type',
+				name: 'type',
+				type: 'options',
+				options: [
+					{
+						name: 'Desc',
+						value: 'desc',
+					},
+					{
+						name: 'Asc',
+						value: 'asc',
+					},
+				],
+				default: 'desc',
+			},
+		],
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['design'],
+				operation: ['getDesignList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort By',
+		name: 'sortBy',
+		type: 'string',
+		default: 'id',
+		displayOptions: {
+			show: {
+				resource: ['design'],
+				operation: ['getDesignList'],
+			},
+		},
+		description: 'Sort by a element of product',
+	},
 	/* -------------------------------------------------------------------------- */
 	/*            entry: Get,Delete design detail                                 */
 	/* -------------------------------------------------------------------------- */
@@ -1432,7 +1827,7 @@ export const designFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['design'],
-				operation: ['createDesign', 'updateDesign'],
+				operation: ['createDesign', 'updateDesign','getDesignList'],
 			},
 		},
 		description: 'Status of design',
@@ -1528,6 +1923,72 @@ export const projectsOperations: INodeProperties[] = [
 	},
 ];
 export const projectFields: INodeProperties[] = [
+	/* -------------------------------------------------------------------------- */
+	/*                         entry:Get list of project                          */
+	/* -------------------------------------------------------------------------- */
+	{
+		displayName: 'Limit',
+		name: 'limitProduct',
+		type: 'number',
+		description: 'Max number of results to return',
+		default: 10,
+		typeOptions: {
+			numberPrecision: 0,
+			minValue: 10,
+			numberStepSize: 1,
+		},
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['project'],
+				operation: ['getProjectList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'collection',
+		placeholder: 'Add the way you want to sort',
+		options: [
+			{
+				displayName: 'Type',
+				name: 'type',
+				type: 'options',
+				options: [
+					{
+						name: 'Desc',
+						value: 'desc',
+					},
+					{
+						name: 'Asc',
+						value: 'asc',
+					},
+				],
+				default: 'desc',
+			},
+		],
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['project'],
+				operation: ['getProjectList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort By',
+		name: 'sortBy',
+		type: 'string',
+		default: 'id',
+		displayOptions: {
+			show: {
+				resource: ['project'],
+				operation: ['getProjectList'],
+			},
+		},
+		description: 'Sort by a element of product',
+	},
 	{
 		displayName: 'Project ID',
 		name: 'projectId',
@@ -1606,7 +2067,7 @@ export const projectFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['project'],
-				operation: ['createProject', 'updateProject'],
+				operation: ['createProject','updateProject','getProjectList'],
 			},
 		},
 		description: 'Status of project',
@@ -1675,6 +2136,75 @@ export const templatesOperations: INodeProperties[] = [
 ];
 
 export const templatesFields: INodeProperties[] = [
+	/* -------------------------------------------------------------------------- */
+	/*                       entry:Get list of template                           */
+	/* -------------------------------------------------------------------------- */
+	{
+		displayName: 'Limit',
+		name: 'limitProduct',
+		type: 'number',
+		description: 'Max number of results to return',
+		default: 10,
+		typeOptions: {
+			numberPrecision: 0,
+			minValue: 10,
+			numberStepSize: 1,
+		},
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['template'],
+				operation: ['getTemplateList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'collection',
+		placeholder: 'Add the way you want to sort',
+		options: [
+			{
+				displayName: 'Type',
+				name: 'type',
+				type: 'options',
+				options: [
+					{
+						name: 'Desc',
+						value: 'desc',
+					},
+					{
+						name: 'Asc',
+						value: 'asc',
+					},
+				],
+				default: 'desc',
+			},
+		],
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['template'],
+				operation: ['getTemplateList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort By',
+		name: 'sortBy',
+		type: 'string',
+		default: 'id',
+		displayOptions: {
+			show: {
+				resource: ['template'],
+				operation: ['getTemplateList'],
+			},
+		},
+		description: 'Sort by a element of product',
+	},
+	/* -------------------------------------------------------------------------- */
+	/*                         entry:create,update Template                       */
+	/* -------------------------------------------------------------------------- */
 	{
 		displayName: 'Project ID',
 		name: 'projectID',
@@ -1852,6 +2382,75 @@ export const storagesOperations: INodeProperties[] = [
 	},
 ];
 export const storagesFields: INodeProperties[] = [
+	/* -------------------------------------------------------------------------- */
+	/*                        entry:Get list of storage                           */
+	/* -------------------------------------------------------------------------- */
+	{
+		displayName: 'Limit',
+		name: 'limitProduct',
+		type: 'number',
+		description: 'Max number of results to return',
+		default: 10,
+		typeOptions: {
+			numberPrecision: 0,
+			minValue: 10,
+			numberStepSize: 1,
+		},
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['storage'],
+				operation: ['getStorageList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'collection',
+		placeholder: 'Add the way you want to sort',
+		options: [
+			{
+				displayName: 'Type',
+				name: 'type',
+				type: 'options',
+				options: [
+					{
+						name: 'Desc',
+						value: 'desc',
+					},
+					{
+						name: 'Asc',
+						value: 'asc',
+					},
+				],
+				default: 'desc',
+			},
+		],
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['storage'],
+				operation: ['getStorageList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort By',
+		name: 'sortBy',
+		type: 'string',
+		default: 'id',
+		displayOptions: {
+			show: {
+				resource: ['storage'],
+				operation: ['getStorageList'],
+			},
+		},
+		description: 'Sort by a element of product',
+	},
+	/* -------------------------------------------------------------------------- */
+	/*                    entry:Create, Update storages                           */
+	/* -------------------------------------------------------------------------- */
 	{
 		displayName: 'Name',
 		name: 'name',
@@ -1953,6 +2552,75 @@ export const fontsOperations: INodeProperties[] = [
 	},
 ];
 export const fontsFields: INodeProperties[] = [
+	/* -------------------------------------------------------------------------- */
+	/*                        entry:Get list of font                              */
+	/* -------------------------------------------------------------------------- */
+	{
+		displayName: 'Limit',
+		name: 'limitProduct',
+		type: 'number',
+		description: 'Max number of results to return',
+		default: 10,
+		typeOptions: {
+			numberPrecision: 0,
+			minValue: 10,
+			numberStepSize: 1,
+		},
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['font'],
+				operation: ['getFontList','getDefaultFontList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'collection',
+		placeholder: 'Add the way you want to sort',
+		options: [
+			{
+				displayName: 'Type',
+				name: 'type',
+				type: 'options',
+				options: [
+					{
+						name: 'Desc',
+						value: 'desc',
+					},
+					{
+						name: 'Asc',
+						value: 'asc',
+					},
+				],
+				default: 'desc',
+			},
+		],
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['font'],
+				operation: ['getFontList','getDefaultFontList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort By',
+		name: 'sortBy',
+		type: 'string',
+		default: 'id',
+		displayOptions: {
+			show: {
+				resource: ['font'],
+				operation: ['getFontList','getDefaultFontList'],
+			},
+		},
+		description: 'Sort by a element of product',
+	},
+	/* -------------------------------------------------------------------------- */
+	/*                  entry:Update, getdetail, delete Font                      */
+	/* -------------------------------------------------------------------------- */
 	{
 		displayName: 'Font ID',
 		name: 'fontId',
@@ -2080,6 +2748,75 @@ export const webhooksOperations: INodeProperties[] = [
 	},
 ];
 export const webhooksFields: INodeProperties[] = [
+	/* -------------------------------------------------------------------------- */
+	/*                        entry:Get list of font                              */
+	/* -------------------------------------------------------------------------- */
+	{
+		displayName: 'Limit',
+		name: 'limitProduct',
+		type: 'number',
+		description: 'Max number of results to return',
+		default: 10,
+		typeOptions: {
+			numberPrecision: 0,
+			minValue: 10,
+			numberStepSize: 1,
+		},
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['webhook'],
+				operation: ['getWebhookList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'collection',
+		placeholder: 'Add the way you want to sort',
+		options: [
+			{
+				displayName: 'Type',
+				name: 'type',
+				type: 'options',
+				options: [
+					{
+						name: 'Desc',
+						value: 'desc',
+					},
+					{
+						name: 'Asc',
+						value: 'asc',
+					},
+				],
+				default: 'desc',
+			},
+		],
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['webhook'],
+				operation: ['getWebhookList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort By',
+		name: 'sortBy',
+		type: 'string',
+		default: 'id',
+		displayOptions: {
+			show: {
+				resource: ['webhook'],
+				operation: ['getWebhookList'],
+			},
+		},
+		description: 'Sort by a element of product',
+	},
+	/* -------------------------------------------------------------------------- */
+	/*             entry:Update, getDetail, delete webhook                        */
+	/* -------------------------------------------------------------------------- */
 	{
 		displayName: 'Webhok ID',
 		name: 'webhookId',
@@ -2250,6 +2987,75 @@ export const clipart_storeageOperations: INodeProperties[] = [
 	},
 ];
 export const clipart_storeageFields: INodeProperties[] = [
+	/* -------------------------------------------------------------------------- */
+	/*                  entry:Get list of clipart-storage                         */
+	/* -------------------------------------------------------------------------- */
+	{
+		displayName: 'Limit',
+		name: 'limitProduct',
+		type: 'number',
+		description: 'Max number of results to return',
+		default: 10,
+		typeOptions: {
+			numberPrecision: 0,
+			minValue: 10,
+			numberStepSize: 1,
+		},
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['clipart_storeage'],
+				operation: ['getClipart_storageList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'collection',
+		placeholder: 'Add the way you want to sort',
+		options: [
+			{
+				displayName: 'Type',
+				name: 'type',
+				type: 'options',
+				options: [
+					{
+						name: 'Desc',
+						value: 'desc',
+					},
+					{
+						name: 'Asc',
+						value: 'asc',
+					},
+				],
+				default: 'desc',
+			},
+		],
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['clipart_storeage'],
+				operation: ['getClipart_storageList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort By',
+		name: 'sortBy',
+		type: 'string',
+		default: 'id',
+		displayOptions: {
+			show: {
+				resource: ['clipart_storeage'],
+				operation: ['getClipart_storageList'],
+			},
+		},
+		description: 'Sort by a element of product',
+	},
+	/* -------------------------------------------------------------------------- */
+	/*                      entry:Create clipart-Storages                         */
+	/* -------------------------------------------------------------------------- */
 	{
 		displayName: 'Name',
 		name: 'name',
@@ -2350,6 +3156,75 @@ export const project_folderOperations: INodeProperties[] = [
 	},
 ];
 export const project_folderFields: INodeProperties[] = [
+	/* -------------------------------------------------------------------------- */
+	/*                entry:Get list of project-folder                            */
+	/* -------------------------------------------------------------------------- */
+	{
+		displayName: 'Limit',
+		name: 'limitProduct',
+		type: 'number',
+		description: 'Max number of results to return',
+		default: 10,
+		typeOptions: {
+			numberPrecision: 0,
+			minValue: 10,
+			numberStepSize: 1,
+		},
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['projectFolder'],
+				operation: ['getProjectFolderList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'collection',
+		placeholder: 'Add the way you want to sort',
+		options: [
+			{
+				displayName: 'Type',
+				name: 'type',
+				type: 'options',
+				options: [
+					{
+						name: 'Desc',
+						value: 'desc',
+					},
+					{
+						name: 'Asc',
+						value: 'asc',
+					},
+				],
+				default: 'desc',
+			},
+		],
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['projectFolder'],
+				operation: ['getProjectFolderList'],
+			},
+		},
+	},
+	{
+		displayName: 'Sort By',
+		name: 'sortBy',
+		type: 'string',
+		default: 'id',
+		displayOptions: {
+			show: {
+				resource: ['projectFolder'],
+				operation: ['getProjectFolderList'],
+			},
+		},
+		description: 'Sort by a element of product',
+	},
+	/* -------------------------------------------------------------------------- */
+	/*           entry:create, delete, getDetail project_folder                   */
+	/* -------------------------------------------------------------------------- */
 	{
 		displayName: 'Storage ID',
 		name: 'storageId',
@@ -2359,7 +3234,7 @@ export const project_folderFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['projectFolder'],
-				operation: ['createProjectFolder','deleteProjectFolder','getProjectsByFolder'],
+				operation: ['createProjectFolder', 'deleteProjectFolder', 'getProjectsByFolder'],
 			},
 		},
 	},
@@ -2371,7 +3246,7 @@ export const project_folderFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['projectFolder'],
-				operation: ['createProjectFolder','getFoldersByProject'],
+				operation: ['createProjectFolder', 'getFoldersByProject'],
 			},
 		},
 	},

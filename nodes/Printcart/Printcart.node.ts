@@ -360,12 +360,37 @@ export class Printcart implements INodeType {
 						returnData.push(responseData);
 					}
 					if (operation === 'getStore') {
+						const limit = this.getNodeParameter('limitProduct', i) as string;
+						const sortBy = (this.getNodeParameter('sortBy', i) as string) || 'default';
+						let sort = 'default';
+						let status = 'default';
+						try {
+							sort = this.getNodeParameter('sort.type', i) as string;
+						} catch (error) {
+							console.log('Sort parameter not found. Using default value.');
+						}
+						try {
+							status = this.getNodeParameter('getByStatus.type', i) as string;
+						} catch (error) {
+							console.log('Status parameter not found. Using default value.');
+						}
+						let url1 = `https://api.printcart.com/v1/stores?limit=${limit}`;
+						if (sort !== 'default') {
+							url1 += `&sort=${sort}`;
+						}
+						if (sortBy !== 'default') {
+							url1 += `&sortBy=${sortBy}`;
+						}
+						if (status !== 'default') {
+							url1 += `&status=${status}`;
+						}
+						console.log(url1);
 						const options: OptionsWithUri = {
 							headers: {
 								Accept: 'application/json',
 							},
 							method: 'GET',
-							uri: `https://api.printcart.com/v1/stores`,
+							uri: url1,
 							json: true,
 						};
 						responseData = await this.helpers.requestWithAuthentication.call(
@@ -392,7 +417,6 @@ export class Printcart implements INodeType {
 						} catch (error) {
 							console.log('Status parameter not found. Using default value.');
 						}
-						console.log(status);
 						let url1 = `https://${sid}:${secret}@api.printcart.com/v1/products?limit=${limit}`;
 						if (sort !== 'default') {
 							url1 += `&sort=${sort}`;
@@ -668,12 +692,37 @@ export class Printcart implements INodeType {
 						returnData.push(responseData);
 					}
 					if (operation === 'getListSide') {
+						const limit = this.getNodeParameter('limitProduct', i) as string;
+						const sortBy = (this.getNodeParameter('sortBy', i) as string) || 'default';
+						let sort = 'default';
+						let status = 'default';
+						try {
+							sort = this.getNodeParameter('sort.type', i) as string;
+						} catch (error) {
+							console.log('Sort parameter not found. Using default value.');
+						}
+						try {
+							status = this.getNodeParameter('getByStatus.type', i) as string;
+						} catch (error) {
+							console.log('Status parameter not found. Using default value.');
+						}
+						let url1 = `https://${sid}:${secret}@api.printcart.com/v1/sides?limit=${limit}`;
+						if (sort !== 'default') {
+							url1 += `&sort=${sort}`;
+						}
+						if (sortBy !== 'default') {
+							url1 += `&sortBy=${sortBy}`;
+						}
+						if (status !== 'default') {
+							url1 += `&status=${status}`;
+						}
+						console.log(url1);
 						const options: OptionsWithUri = {
 							headers: {
 								Accept: 'application/json',
 							},
 							method: 'GET',
-							uri: `https://${sid}:${secret}@api.printcart.com/v1/sides`,
+							uri: url1,
 							json: true,
 						};
 						responseData = await this.helpers.request.call(this, options);
@@ -755,13 +804,41 @@ export class Printcart implements INodeType {
 					}
 				}
 				if (resource === 'image') {
+					if (operation === 'addImage') {
+						const options: OptionsWithUri = {
+							headers: {
+								Accept: 'application/json',
+							},
+							method: 'POST',
+							uri: `https://${sid}:${secret}@api.printcart.com/v1/images`,
+							json: true,
+						};
+						responseData = await this.helpers.request.call(this, options);
+						returnData.push(responseData);
+					}
 					if (operation === 'getListImage') {
+						const limit = this.getNodeParameter('limitProduct', i) as string;
+						const sortBy = (this.getNodeParameter('sortBy', i) as string) || 'default';
+						let sort = 'default';
+						try {
+							sort = this.getNodeParameter('sort.type', i) as string;
+						} catch (error) {
+							console.log('Sort parameter not found. Using default value.');
+						}
+						let url1 = `https://${sid}:${secret}@api.printcart.com/v1/images?limit=${limit}`;
+						if (sort !== 'default') {
+							url1 += `&sort=${sort}`;
+						}
+						if (sortBy !== 'default') {
+							url1 += `&sortBy=${sortBy}`;
+						}
+						console.log(url1);
 						const options: OptionsWithUri = {
 							headers: {
 								Accept: 'application/json',
 							},
 							method: 'GET',
-							uri: `https://${sid}:${secret}@api.printcart.com/v1/images`,
+							uri: url1,
 							json: true,
 						};
 						responseData = await this.helpers.request.call(this, options);
@@ -808,12 +885,28 @@ export class Printcart implements INodeType {
 				}
 				if (resource === 'clipart') {
 					if (operation === 'getClipartList') {
+						const limit = this.getNodeParameter('limitProduct', i) as string;
+						const sortBy = (this.getNodeParameter('sortBy', i) as string) || 'default';
+						let sort = 'default';
+						try {
+							sort = this.getNodeParameter('sort.type', i) as string;
+						} catch (error) {
+							console.log('Sort parameter not found. Using default value.');
+						}
+						let url1 = `https://${sid}:${secret}@api.printcart.com/v1/cliparts?limit=${limit}`;
+						if (sort !== 'default') {
+							url1 += `&sort=${sort}`;
+						}
+						if (sortBy !== 'default') {
+							url1 += `&sortBy=${sortBy}`;
+						}
+						console.log(url1);
 						const options: OptionsWithUri = {
 							headers: {
 								Accept: 'application/json',
 							},
 							method: 'GET',
-							uri: `https://${sid}:${secret}@api.printcart.com/v1/cliparts`,
+							uri: url1,
 							json: true,
 						};
 						responseData = await this.helpers.request.call(this, options);
@@ -872,12 +965,37 @@ export class Printcart implements INodeType {
 				}
 				if (resource === 'design') {
 					if (operation === 'getDesignList') {
+						const limit = this.getNodeParameter('limitProduct', i) as string;
+						const sortBy = (this.getNodeParameter('sortBy', i) as string) || 'default';
+						let sort = 'default';
+						let status = 'default';
+						try {
+							sort = this.getNodeParameter('sort.type', i) as string;
+						} catch (error) {
+							console.log('Sort parameter not found. Using default value.');
+						}
+						try {
+							status = this.getNodeParameter('status.type', i) as string;
+						} catch (error) {
+							console.log('Status parameter not found. Using default value.');
+						}
+						let url1 = `https://${sid}:${secret}@api.printcart.com/v1/designs?limit=${limit}`;
+						if (sort !== 'default') {
+							url1 += `&sort=${sort}`;
+						}
+						if (sortBy !== 'default') {
+							url1 += `&sortBy=${sortBy}`;
+						}
+						if (status !== 'default') {
+							url1 += `&status=${status}`;
+						}
+						console.log(url1);
 						const options: OptionsWithUri = {
 							headers: {
 								Accept: 'application/json',
 							},
 							method: 'GET',
-							uri: `https://${sid}:${secret}@api.printcart.com/v1/designs`,
+							uri: url1,
 							json: true,
 						};
 						responseData = await this.helpers.request.call(this, options);
@@ -1022,12 +1140,37 @@ export class Printcart implements INodeType {
 						returnData.push(responseData);
 					}
 					if (operation === 'getProjectList') {
+						const limit = this.getNodeParameter('limitProduct', i) as string;
+						const sortBy = (this.getNodeParameter('sortBy', i) as string) || 'default';
+						let sort = 'default';
+						let status = 'default';
+						try {
+							sort = this.getNodeParameter('sort.type', i) as string;
+						} catch (error) {
+							console.log('Sort parameter not found. Using default value.');
+						}
+						try {
+							status = this.getNodeParameter('status.type', i) as string;
+						} catch (error) {
+							console.log('Status parameter not found. Using default value.');
+						}
+						let url1 = `https://${sid}:${secret}@api.printcart.com/v1/projects?limit=${limit}`;
+						if (sort !== 'default') {
+							url1 += `&sort=${sort}`;
+						}
+						if (sortBy !== 'default') {
+							url1 += `&sortBy=${sortBy}`;
+						}
+						if (status !== 'default') {
+							url1 += `&status=${status}`;
+						}
+						console.log(url1);
 						const options: OptionsWithUri = {
 							headers: {
 								Accept: 'application/json',
 							},
 							method: 'GET',
-							uri: `https://${sid}:${secret}@api.printcart.com/v1/projects`,
+							uri: url1,
 							json: true,
 						};
 						responseData = await this.helpers.request.call(this, options);
@@ -1103,12 +1246,28 @@ export class Printcart implements INodeType {
 				}
 				if (resource === 'template') {
 					if (operation === 'getTemplateList') {
+						const limit = this.getNodeParameter('limitProduct', i) as string;
+						const sortBy = (this.getNodeParameter('sortBy', i) as string) || 'default';
+						let sort = 'default';
+						try {
+							sort = this.getNodeParameter('sort.type', i) as string;
+						} catch (error) {
+							console.log('Sort parameter not found. Using default value.');
+						}
+						let url1 = `https://${sid}:${secret}@api.printcart.com/v1/templates?limit=${limit}`;
+						if (sort !== 'default') {
+							url1 += `&sort=${sort}`;
+						}
+						if (sortBy !== 'default') {
+							url1 += `&sortBy=${sortBy}`;
+						}
+						console.log(url1);
 						const options: OptionsWithUri = {
 							headers: {
 								Accept: 'application/json',
 							},
 							method: 'GET',
-							uri: `https://${sid}:${secret}@api.printcart.com/v1/templates`,
+							uri: url1,
 							json: true,
 						};
 						responseData = await this.helpers.request.call(this, options);
@@ -1266,12 +1425,28 @@ export class Printcart implements INodeType {
 						returnData.push(responseData);
 					}
 					if (operation === 'getStorageList') {
+						const limit = this.getNodeParameter('limitProduct', i) as string;
+						const sortBy = (this.getNodeParameter('sortBy', i) as string) || 'default';
+						let sort = 'default';
+						try {
+							sort = this.getNodeParameter('sort.type', i) as string;
+						} catch (error) {
+							console.log('Sort parameter not found. Using default value.');
+						}
+						let url1 = `https://${sid}:${secret}@api.printcart.com/v1/storages?limit=${limit}`;
+						if (sort !== 'default') {
+							url1 += `&sort=${sort}`;
+						}
+						if (sortBy !== 'default') {
+							url1 += `&sortBy=${sortBy}`;
+						}
+						console.log(url1);
 						const options: OptionsWithUri = {
 							headers: {
 								Accept: 'application/json',
 							},
 							method: 'GET',
-							uri: `https://${sid}:${secret}@api.printcart.com/v1/storages`,
+							uri: url1,
 							json: true,
 						};
 						responseData = await this.helpers.request.call(this, options);
@@ -1354,24 +1529,56 @@ export class Printcart implements INodeType {
 						returnData.push(responseData);
 					}
 					if (operation === 'getDefaultFontList') {
+						const limit = this.getNodeParameter('limitProduct', i) as string;
+						const sortBy = (this.getNodeParameter('sortBy', i) as string) || 'default';
+						let sort = 'default';
+						try {
+							sort = this.getNodeParameter('sort.type', i) as string;
+						} catch (error) {
+							console.log('Sort parameter not found. Using default value.');
+						}
+						let url1 = `https://${sid}:${secret}@api.printcart.com/v1/fonts?limit=${limit}`;
+						if (sort !== 'default') {
+							url1 += `&sort=${sort}`;
+						}
+						if (sortBy !== 'default') {
+							url1 += `&sortBy=${sortBy}`;
+						}
+						console.log(url1);
 						const options: OptionsWithUri = {
 							headers: {
 								Accept: 'application/json',
 							},
 							method: 'GET',
-							uri: `https://${sid}:${secret}@api.printcart.com/v1/fonts/default`,
+							uri: url1,
 							json: true,
 						};
 						responseData = await this.helpers.request.call(this, options);
 						returnData.push(responseData);
 					}
 					if (operation === 'getFontList') {
+						const limit = this.getNodeParameter('limitProduct', i) as string;
+						const sortBy = (this.getNodeParameter('sortBy', i) as string) || 'default';
+						let sort = 'default';
+						try {
+							sort = this.getNodeParameter('sort.type', i) as string;
+						} catch (error) {
+							console.log('Sort parameter not found. Using default value.');
+						}
+						let url1 = `https://${sid}:${secret}@api.printcart.com/v1/fonts?limit=${limit}`;
+						if (sort !== 'default') {
+							url1 += `&sort=${sort}`;
+						}
+						if (sortBy !== 'default') {
+							url1 += `&sortBy=${sortBy}`;
+						}
+						console.log(url1);
 						const options: OptionsWithUri = {
 							headers: {
 								Accept: 'application/json',
 							},
 							method: 'GET',
-							uri: `https://${sid}:${secret}@api.printcart.com/v1/fonts`,
+							uri: url1,
 							json: true,
 						};
 						responseData = await this.helpers.request.call(this, options);
@@ -1460,12 +1667,28 @@ export class Printcart implements INodeType {
 						returnData.push(responseData);
 					}
 					if (operation === 'getWebhookList') {
+						const limit = this.getNodeParameter('limitProduct', i) as string;
+						const sortBy = (this.getNodeParameter('sortBy', i) as string) || 'default';
+						let sort = 'default';
+						try {
+							sort = this.getNodeParameter('sort.type', i) as string;
+						} catch (error) {
+							console.log('Sort parameter not found. Using default value.');
+						}
+						let url1 = `https://${sid}:${secret}@api.printcart.com/v1/webhooks?limit=${limit}`;
+						if (sort !== 'default') {
+							url1 += `&sort=${sort}`;
+						}
+						if (sortBy !== 'default') {
+							url1 += `&sortBy=${sortBy}`;
+						}
+						console.log(url1);
 						const options: OptionsWithUri = {
 							headers: {
 								Accept: 'application/json',
 							},
 							method: 'GET',
-							uri: `https://${sid}:${secret}@api.printcart.com/v1/webhooks`,
+							uri: url1,
 							json: true,
 						};
 						responseData = await this.helpers.request.call(this, options);
@@ -1518,12 +1741,28 @@ export class Printcart implements INodeType {
 						returnData.push(responseData);
 					}
 					if (operation === 'getClipart_storageList') {
+						const limit = this.getNodeParameter('limitProduct', i) as string;
+						const sortBy = (this.getNodeParameter('sortBy', i) as string) || 'default';
+						let sort = 'default';
+						try {
+							sort = this.getNodeParameter('sort.type', i) as string;
+						} catch (error) {
+							console.log('Sort parameter not found. Using default value.');
+						}
+						let url1 = `https://${sid}:${secret}@api.printcart.com/v1/clipart-storages?limit=${limit}`;
+						if (sort !== 'default') {
+							url1 += `&sort=${sort}`;
+						}
+						if (sortBy !== 'default') {
+							url1 += `&sortBy=${sortBy}`;
+						}
+						console.log(url1);
 						const options: OptionsWithUri = {
 							headers: {
 								Accept: 'application/json',
 							},
 							method: 'GET',
-							uri: `https://${sid}:${secret}@api.printcart.com/v1/clipart-storages`,
+							uri: url1,
 							json: true,
 						};
 						responseData = await this.helpers.request.call(this, options);
@@ -1589,12 +1828,28 @@ export class Printcart implements INodeType {
 						returnData.push(responseData);
 					}
 					if (operation === 'getProjectFolderList') {
+						const limit = this.getNodeParameter('limitProduct', i) as string;
+						const sortBy = (this.getNodeParameter('sortBy', i) as string) || 'default';
+						let sort = 'default';
+						try {
+							sort = this.getNodeParameter('sort.type', i) as string;
+						} catch (error) {
+							console.log('Sort parameter not found. Using default value.');
+						}
+						let url1 = `https://${sid}:${secret}@api.printcart.com/v1/project-folder?limit=${limit}`;
+						if (sort !== 'default') {
+							url1 += `&sort=${sort}`;
+						}
+						if (sortBy !== 'default') {
+							url1 += `&sortBy=${sortBy}`;
+						}
+						console.log(url1);
 						const options: OptionsWithUri = {
 							headers: {
 								Accept: 'application/json',
 							},
 							method: 'GET',
-							uri: `https://${sid}:${secret}@api.printcart.com/v1/project-folder`,
+							uri: url1,
 							json: true,
 						};
 						responseData = await this.helpers.request.call(this, options);
