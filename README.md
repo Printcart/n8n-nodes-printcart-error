@@ -1,4 +1,7 @@
+
 ![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
+
+## When install a custom node, create "custom" folder in ".n8n" file. ".n8n" file usually locate in "Users/(your-cumputer-name)". Then add this custom file to it
 
 # n8n-nodes-starter
 
@@ -45,3 +48,5 @@ Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/
 ## License
 
 [MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+
+
