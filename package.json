@@ -1,19 +1,19 @@
 {
-  "name": "n8n-nodes-printcart",
-  "version": "0.1.0",
-  "description": "",
+  "name": "@printcart/n8n-nodes-printcart",
+  "version": "1.0.0",
+  "description": "Workflow automation tool with Printcart API",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
   "homepage": "",
   "author": {
-    "name": "",
-    "email": "hieuwork.com@gmail.com"
+    "name": "Printcart",
+    "email": "dev@printcart.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "git+https://github.com/Printcart/n8n-nodes-printcart"
   },
   "main": "index.js",
   "scripts": {
